@@ -86,16 +86,16 @@ export default function Listings() {
   };
 
   return (
-    <section id="listings" className="relative py-24 bg-kayolla-gray overflow-hidden">
+    <section id="listings" className="relative py-24 overflow-hidden bg-transparent">
       {config?.listings?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
             src={config.listings.backgroundImage} 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-30"
             alt=""
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-gray via-transparent to-kayolla-gray" />
+          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-black/20 via-transparent to-kayolla-black/15" />
         </div>
       )}
       
@@ -131,8 +131,8 @@ export default function Listings() {
                       onClick={() => setSelectedPriceLocation(guide.location)}
                       className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${
                         selectedPriceLocation === guide.location 
-                          ? "bg-kayolla-red text-white shadow-lg" 
-                          : "bg-white text-kayolla-black/60 border border-kayolla-black/5 hover:border-kayolla-red/20"
+                        ? "bg-kayolla-red text-white shadow-lg" 
+                          : "bg-white/20 text-kayolla-black/70 border border-white/20 hover:border-kayolla-red/20"
                       }`}
                     >
                       {guide.location}
@@ -154,7 +154,7 @@ export default function Listings() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="bg-white p-6 rounded-[2rem] border border-kayolla-black/5 shadow-sm hover:shadow-xl transition-all group cursor-default"
+                    className="bg-white/28 backdrop-blur-sm p-6 rounded-[2rem] border border-white/20 shadow-sm hover:shadow-xl transition-all group cursor-default"
                   >
                     <p className="text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest mb-2 group-hover:text-kayolla-red transition-colors">{type}</p>
                     <div className="flex flex-col">
@@ -203,7 +203,7 @@ export default function Listings() {
                     className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 border ${
                       activeFilter === type
                         ? "bg-kayolla-red text-white border-kayolla-red shadow-lg shadow-kayolla-red/20"
-                        : "bg-white text-kayolla-black border-kayolla-black/5 hover:border-kayolla-red/20"
+                        : "bg-white/20 text-kayolla-black border-white/20 hover:border-kayolla-red/20"
                     }`}
                     role="tab"
                     aria-selected={activeFilter === type}
@@ -220,7 +220,7 @@ export default function Listings() {
                 className={`flex-1 md:flex-none px-6 py-3 rounded-2xl text-xs font-bold transition-all duration-300 border flex items-center justify-center gap-2 ${
                   showAdvancedFilters 
                     ? "bg-kayolla-black text-white border-kayolla-black" 
-                    : "bg-white text-kayolla-black border-kayolla-black/5 hover:border-kayolla-red/20"
+                    : "bg-white/20 text-kayolla-black border-white/20 hover:border-kayolla-red/20"
                 }`}
                 aria-expanded={showAdvancedFilters}
               >
@@ -229,7 +229,7 @@ export default function Listings() {
                 <ChevronDown size={14} className={`transition-transform ${showAdvancedFilters ? "rotate-180" : ""}`} />
               </button>
 
-              <div className="flex bg-white p-1 rounded-2xl border border-kayolla-black/5 shadow-md">
+                <div className="flex bg-white/20 p-1 rounded-2xl border border-white/20 shadow-md backdrop-blur-sm">
                 <button
                   onClick={() => setViewMode("grid")}
                   className={`p-2.5 rounded-xl transition-all ${
@@ -253,7 +253,7 @@ export default function Listings() {
           </div>
 
           <div className="flex justify-end mb-8">
-            <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-kayolla-black/5 shadow-sm">
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/20 rounded-xl border border-white/20 shadow-sm backdrop-blur-sm">
               <Filter size={14} className="text-kayolla-black/40" />
               <select 
                 value={sortBy}
@@ -277,7 +277,7 @@ export default function Listings() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden mb-12"
               >
-                <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-kayolla-black/5 grid md:grid-cols-4 gap-8">
+                <div className="bg-white/20 backdrop-blur-sm p-8 rounded-[2.5rem] shadow-xl border border-white/20 grid md:grid-cols-4 gap-8">
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-xs font-bold text-kayolla-black/50 uppercase tracking-widest ml-1">
                       <Bed size={14} />
@@ -291,7 +291,7 @@ export default function Listings() {
                           className={`flex-1 py-3 rounded-xl text-xs font-bold transition-all ${
                             filters.bedrooms === num 
                               ? "bg-kayolla-red text-white shadow-md" 
-                              : "bg-kayolla-gray/50 text-kayolla-black/60 hover:bg-kayolla-gray"
+                              : "bg-white/20 text-kayolla-black/70 hover:bg-white/35"
                           }`}
                         >
                           {num === 0 ? "Any" : `${num}+`}
@@ -312,7 +312,7 @@ export default function Listings() {
                           className={`flex-1 py-3 rounded-xl text-xs font-bold transition-all ${
                             filters.bathrooms === num 
                               ? "bg-kayolla-red text-white shadow-md" 
-                              : "bg-kayolla-gray/50 text-kayolla-black/60 hover:bg-kayolla-gray"
+                              : "bg-white/20 text-kayolla-black/70 hover:bg-white/35"
                           }`}
                         >
                           {num === 0 ? "Any" : `${num}+`}
@@ -333,7 +333,7 @@ export default function Listings() {
                           placeholder="0"
                           value={filters.minPrice || ""}
                           onChange={(e) => setFilters({ ...filters, minPrice: Number(e.target.value) })}
-                          className="w-full pl-12 pr-4 py-3 bg-kayolla-gray/50 border border-transparent rounded-xl focus:bg-white focus:border-kayolla-red transition-all text-sm font-bold"
+                          className="w-full pl-12 pr-4 py-3 bg-white/20 border border-white/20 rounded-xl focus:bg-white/35 focus:border-kayolla-red transition-all text-sm font-bold"
                         />
                       </div>
                       <span className="text-kayolla-black/20">—</span>
@@ -344,7 +344,7 @@ export default function Listings() {
                           placeholder="Any"
                           value={filters.maxPrice === 50000000 ? "" : filters.maxPrice}
                           onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value ? Number(e.target.value) : 50000000 })}
-                          className="w-full pl-12 pr-4 py-3 bg-kayolla-gray/50 border border-transparent rounded-xl focus:bg-white focus:border-kayolla-red transition-all text-sm font-bold"
+                          className="w-full pl-12 pr-4 py-3 bg-white/20 border border-white/20 rounded-xl focus:bg-white/35 focus:border-kayolla-red transition-all text-sm font-bold"
                         />
                       </div>
                     </div>
@@ -368,25 +368,35 @@ export default function Listings() {
                 filteredListings.map((property, index) => {
                   const isSelected = selectedForComparison.find(p => p.id === property.id);
                   return (
-                    <motion.div
-                      key={property.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.4, delay: index * 0.05 }}
-                      className="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-kayolla-black/5 group hover:shadow-2xl transition-all duration-500 flex flex-col"
-                    >
-                      <div className="relative h-64 overflow-hidden">
-                        <img
-                          src={property.image}
-                          alt={property.title}
+                      <motion.div
+                        key={property.id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        onClick={() => setViewingProperty(property)}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            setViewingProperty(property);
+                          }
+                        }}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`View details for ${property.title}`}
+                        className="bg-white/24 backdrop-blur-sm rounded-[2rem] overflow-hidden shadow-xl border border-white/20 group hover:shadow-2xl transition-all duration-500 flex flex-col cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-kayolla-red/40"
+                      >
+                        <div className="relative h-64 overflow-hidden">
+                          <img
+                            src={property.image}
+                            alt={property.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           referrerPolicy="no-referrer"
                         />
                         <div className="absolute top-4 left-4 flex flex-col gap-2">
                           <div className="flex gap-2">
-                            <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-kayolla-red shadow-lg">
+                            <span className="px-4 py-2 bg-white/35 backdrop-blur-sm rounded-full text-xs font-bold text-kayolla-red shadow-lg">
                               {property.type}
                             </span>
                             {property.isFeatured && (
@@ -401,7 +411,8 @@ export default function Listings() {
                               href={property.virtualTourUrl} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="px-4 py-2 bg-kayolla-black/80 backdrop-blur-md rounded-full text-xs font-bold text-white shadow-lg flex items-center gap-2 hover:bg-kayolla-red transition-colors"
+                              onClick={(e) => e.stopPropagation()}
+                              className="px-4 py-2 bg-kayolla-black/70 backdrop-blur-sm rounded-full text-xs font-bold text-white shadow-lg flex items-center gap-2 hover:bg-kayolla-red transition-colors"
                             >
                               <ExternalLink size={12} />
                               <span>Virtual Tour</span>
@@ -415,11 +426,15 @@ export default function Listings() {
                         </div>
                         
                         <button
-                          onClick={() => toggleComparison(property)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleComparison(property);
+                          }}
+                          type="button"
                           className={`absolute top-4 right-4 p-3 rounded-full shadow-lg transition-all duration-300 ${
                             isSelected 
                               ? "bg-kayolla-red text-white" 
-                              : "bg-white/90 backdrop-blur-md text-kayolla-black hover:bg-kayolla-red hover:text-white"
+                              : "bg-white/35 backdrop-blur-sm text-kayolla-black hover:bg-kayolla-red hover:text-white"
                           }`}
                         >
                           {isSelected ? <Check size={18} /> : <Plus size={18} />}
@@ -461,7 +476,7 @@ export default function Listings() {
                         
                         <div className="flex flex-wrap gap-2 mb-8">
                           {property.features.map((feature, i) => (
-                            <span key={i} className="px-3 py-1 bg-kayolla-gray rounded-lg text-[10px] font-bold text-kayolla-black/60 uppercase tracking-wider">
+                            <span key={i} className="px-3 py-1 bg-white/20 rounded-lg text-[10px] font-bold text-kayolla-black/70 uppercase tracking-wider">
                               {feature}
                             </span>
                           ))}
@@ -469,14 +484,22 @@ export default function Listings() {
                         
                         <div className="mt-auto grid grid-cols-2 gap-3">
                           <button 
-                            onClick={() => setSchedulingProperty(property)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSchedulingProperty(property);
+                            }}
+                            type="button"
                             className="py-4 bg-kayolla-black text-white rounded-xl text-xs font-bold hover:bg-kayolla-red transition-all duration-300"
                           >
                             Schedule Viewing
                           </button>
                           <button 
-                            onClick={() => setViewingProperty(property)}
-                            className="py-4 bg-kayolla-gray text-kayolla-black rounded-xl text-xs font-bold hover:bg-kayolla-black hover:text-white transition-all duration-300"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setViewingProperty(property);
+                            }}
+                            type="button"
+                            className="py-4 bg-white/25 text-kayolla-black rounded-xl text-xs font-bold hover:bg-kayolla-black hover:text-white transition-all duration-300"
                           >
                             View Details
                           </button>
@@ -580,5 +603,3 @@ export default function Listings() {
     </section>
   );
 }
-
-

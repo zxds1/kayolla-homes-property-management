@@ -33,6 +33,7 @@ interface SiteConfig {
     title: string;
     subtitle: string;
     backgroundImage: string;
+    statsBackgroundImage?: string;
   };
   about: {
     title: string;
@@ -51,6 +52,12 @@ interface SiteConfig {
   listings: {
     backgroundImage?: string;
   };
+  testimonials?: {
+    backgroundImage?: string;
+  };
+  officeMap?: {
+    backgroundImage?: string;
+  };
   contact: {
     title: string;
     description: string;
@@ -59,6 +66,7 @@ interface SiteConfig {
   footer: {
     description: string;
     backgroundImage: string;
+    linksBackgroundImage?: string;
   };
   socialLinks: {
     facebook: string;
@@ -174,6 +182,8 @@ interface AppData {
   config: SiteConfig;
 }
 
+const LOCAL_APP_DATA_KEY = "kayolla.appData";
+
 export default function AdminPanel({ onClose }: { onClose: () => void }) {
   const [data, setData] = useState<AppData | null>(null);
   const [activeTab, setActiveTab] = useState<"listings" | "config">("listings");
@@ -225,6 +235,14 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
       setData(json);
     } catch (error) {
       console.error("Failed to fetch data", error);
+      try {
+        const local = JSON.parse(localStorage.getItem(LOCAL_APP_DATA_KEY) || "null");
+        if (local) {
+          setData(local);
+        }
+      } catch {
+        // Ignore local parsing errors and keep the current in-memory state.
+      }
     }
   };
 
@@ -241,9 +259,17 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
         body: JSON.stringify(newData),
       });
       setData(newData);
+      localStorage.setItem(LOCAL_APP_DATA_KEY, JSON.stringify(newData));
       setEditingProperty(null);
     } catch (error) {
       console.error("Failed to save data", error);
+      try {
+        localStorage.setItem(LOCAL_APP_DATA_KEY, JSON.stringify(newData));
+        setData(newData);
+        setEditingProperty(null);
+      } catch {
+        // Ignore localStorage failures and fall through.
+      }
     } finally {
       setIsSaving(false);
     }
@@ -492,6 +518,12 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                       onChange={(url) => handleSaveConfig({ ...data.config, hero: { ...data.config.hero, backgroundImage: url } })}
                       getAuthToken={getAuthToken}
                     />
+                    <ImageUploadField 
+                      label="Hero Stats Background Image"
+                      value={data.config.hero?.statsBackgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, hero: { ...data.config.hero, statsBackgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
                   </div>
                 </div>
 
@@ -569,6 +601,70 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                   </div>
                 </div>
 
+                {/* Trust Bar Config */}
+                <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
+                  <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
+                    <ImageIcon className="text-kayolla-red" size={20} />
+                    Trust Bar
+                  </h3>
+                  <div className="grid grid-cols-1 gap-6">
+                    <ImageUploadField 
+                      label="Trust Bar Background Image"
+                      value={data.config.trustBar?.backgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, trustBar: { ...data.config.trustBar, backgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
+                  </div>
+                </div>
+
+                {/* CTA Config */}
+                <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
+                  <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
+                    <ImageIcon className="text-kayolla-red" size={20} />
+                    Call To Action
+                  </h3>
+                  <div className="grid grid-cols-1 gap-6">
+                    <ImageUploadField 
+                      label="CTA Background Image"
+                      value={data.config.cta?.backgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, cta: { ...data.config.cta, backgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
+                  </div>
+                </div>
+
+                {/* Testimonials Config */}
+                <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
+                  <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
+                    <ImageIcon className="text-kayolla-red" size={20} />
+                    Testimonials
+                  </h3>
+                  <div className="grid grid-cols-1 gap-6">
+                    <ImageUploadField 
+                      label="Testimonials Background Image"
+                      value={data.config.testimonials?.backgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, testimonials: { ...data.config.testimonials, backgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
+                  </div>
+                </div>
+
+                {/* Office Map Config */}
+                <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
+                  <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
+                    <ImageIcon className="text-kayolla-red" size={20} />
+                    Office Map
+                  </h3>
+                  <div className="grid grid-cols-1 gap-6">
+                    <ImageUploadField 
+                      label="Office Map Background Image"
+                      value={data.config.officeMap?.backgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, officeMap: { ...data.config.officeMap, backgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
+                  </div>
+                </div>
+
                 {/* Contact Section Config */}
                 <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
                   <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
@@ -623,6 +719,12 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                       label="Footer Background Image"
                       value={data.config.footer?.backgroundImage || ""}
                       onChange={(url) => handleSaveConfig({ ...data.config, footer: { ...data.config.footer, backgroundImage: url } })}
+                      getAuthToken={getAuthToken}
+                    />
+                    <ImageUploadField 
+                      label="Footer Links Background Image"
+                      value={data.config.footer?.linksBackgroundImage || ""}
+                      onChange={(url) => handleSaveConfig({ ...data.config, footer: { ...data.config.footer, linksBackgroundImage: url } })}
                       getAuthToken={getAuthToken}
                     />
                   </div>

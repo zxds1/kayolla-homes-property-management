@@ -47,16 +47,16 @@ export default function Services() {
   const config = data?.config;
 
   return (
-    <section id="services" className="relative py-24 bg-white overflow-hidden">
+    <section id="services" className="relative py-24 overflow-hidden bg-transparent">
       {/* Background Image Accent */}
       <div className="absolute inset-0 z-0">
         <img 
           src={config?.servicesSection?.backgroundImage || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"} 
-          className="w-full h-full object-cover opacity-5"
+          className="w-full h-full object-cover opacity-25"
           alt=""
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-kayolla-white/85 via-transparent to-kayolla-white/85" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group p-8 bg-kayolla-gray rounded-3xl border border-transparent hover:border-kayolla-red/20 hover:bg-white hover:shadow-2xl hover:shadow-kayolla-red/5 transition-all duration-300"
+                className="group p-8 bg-white/70 backdrop-blur-md rounded-3xl border border-transparent hover:border-kayolla-red/20 hover:bg-white/90 hover:shadow-2xl hover:shadow-kayolla-red/5 transition-all duration-300"
               >
                 <div className={`w-14 h-14 bg-kayolla-red/10 text-kayolla-red rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent size={28} />

@@ -68,16 +68,16 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 bg-white overflow-hidden" aria-labelledby="contact-heading">
+    <section id="contact" className="relative py-24 overflow-hidden bg-transparent" aria-labelledby="contact-heading">
       {config?.contact?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
             src={config.contact.backgroundImage} 
-            className="w-full h-full object-cover opacity-5"
+            className="w-full h-full object-cover opacity-25"
             alt=""
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-black/15 via-transparent to-kayolla-black/10" />
         </div>
       )}
       
@@ -136,7 +136,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-kayolla-gray p-10 rounded-[3rem] shadow-xl border border-kayolla-black/5"
+            className="bg-white/28 backdrop-blur-sm p-10 rounded-[3rem] shadow-xl border border-white/20"
           >
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <input
@@ -157,7 +157,7 @@ export default function Contact() {
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`w-full px-6 py-4 bg-white border ${errors.name ? "border-kayolla-red" : "border-kayolla-black/10"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
+                    className={`w-full px-6 py-4 bg-white/35 backdrop-blur-sm border ${errors.name ? "border-kayolla-red" : "border-white/25"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? "name-error" : undefined}
                   />
@@ -171,7 +171,7 @@ export default function Contact() {
                     placeholder="0712 345 678"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className={`w-full px-6 py-4 bg-white border ${errors.phone ? "border-kayolla-red" : "border-kayolla-black/10"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
+                    className={`w-full px-6 py-4 bg-white/35 backdrop-blur-sm border ${errors.phone ? "border-kayolla-red" : "border-white/25"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
                     aria-invalid={!!errors.phone}
                     aria-describedby={errors.phone ? "phone-error" : undefined}
                   />
@@ -186,7 +186,7 @@ export default function Contact() {
                     id="service"
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-6 py-4 bg-white border border-kayolla-black/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all appearance-none"
+                    className="w-full px-6 py-4 bg-white/35 backdrop-blur-sm border border-white/25 rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all appearance-none"
                   >
                     <option>Rent Collection</option>
                     <option>Property Management</option>
@@ -208,7 +208,7 @@ export default function Contact() {
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className={`w-full px-6 py-4 bg-white border ${errors.message ? "border-kayolla-red" : "border-kayolla-black/10"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
+                  className={`w-full px-6 py-4 bg-white/35 backdrop-blur-sm border ${errors.message ? "border-kayolla-red" : "border-white/25"} rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all`}
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? "message-error" : undefined}
                 />

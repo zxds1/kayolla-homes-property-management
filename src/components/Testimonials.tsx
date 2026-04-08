@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Quote, Star } from "lucide-react";
+import { useAppData } from "../hooks/useAppData";
 
 const testimonials = [
   {
@@ -23,9 +24,24 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const { data } = useAppData();
+  const config = data?.config;
+
   return (
-    <section id="testimonials" className="py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="relative py-24 overflow-hidden bg-transparent">
+      {config?.testimonials?.backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={config.testimonials.backgroundImage}
+            className="w-full h-full object-cover opacity-25"
+            alt=""
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-black/15 via-transparent to-kayolla-black/10" />
+        </div>
+      )}
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -54,7 +70,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="relative p-10 bg-kayolla-gray rounded-[3rem] border border-transparent hover:border-kayolla-red/20 hover:bg-white hover:shadow-2xl transition-all duration-300"
+              className="relative p-10 bg-white/28 backdrop-blur-sm rounded-[3rem] border border-white/20 hover:border-kayolla-red/20 hover:bg-white/38 hover:shadow-2xl transition-all duration-300"
             >
               <div className="absolute top-8 right-8 text-kayolla-red/10">
                 <Quote size={64} />
@@ -74,7 +90,7 @@ export default function Testimonials() {
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-lg"
+                  className="w-14 h-14 rounded-full object-cover border-2 border-white/60 shadow-lg"
                   referrerPolicy="no-referrer"
                 />
                 <div>

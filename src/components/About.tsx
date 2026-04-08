@@ -7,16 +7,16 @@ export default function About() {
   const config = data?.config;
 
   return (
-    <section id="about" className="relative py-24 bg-kayolla-gray overflow-hidden">
+    <section id="about" className="relative py-24 overflow-hidden bg-transparent">
       {config?.about?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
             src={config.about.backgroundImage} 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-30"
             alt=""
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-gray via-transparent to-kayolla-gray" />
+          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-black/20 via-transparent to-kayolla-black/15" />
         </div>
       )}
       
@@ -77,12 +77,12 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-2 gap-6">
-              <div className="p-6 bg-white rounded-2xl border border-kayolla-black/5">
+              <div className="p-6 bg-white/30 backdrop-blur-sm rounded-2xl border border-white/20">
                 <Award className="text-kayolla-red mb-4" size={32} />
                 <h4 className="font-serif font-bold text-lg mb-1">Certified</h4>
                 <p className="text-xs text-kayolla-black/50">Licensed real estate agency</p>
               </div>
-              <div className="p-6 bg-white rounded-2xl border border-kayolla-black/5">
+              <div className="p-6 bg-white/30 backdrop-blur-sm rounded-2xl border border-white/20">
                 <Users2 className="text-kayolla-red mb-4" size={32} />
                 <h4 className="font-serif font-bold text-lg mb-1">Community</h4>
                 <p className="text-xs text-kayolla-black/50">Strong local partnerships</p>

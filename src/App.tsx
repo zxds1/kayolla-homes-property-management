@@ -69,8 +69,19 @@ export default function App() {
             <Hero />
             
             {/* Trust Bar */}
-            <div className="bg-kayolla-black py-12 overflow-hidden border-y border-white/5">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative bg-kayolla-black py-12 overflow-hidden border-y border-white/5">
+              {data?.config?.trustBar?.backgroundImage && (
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={data.config.trustBar.backgroundImage}
+                    alt=""
+                    className="w-full h-full object-cover opacity-35"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-kayolla-black/75 via-kayolla-black/55 to-kayolla-black/75" />
+                </div>
+              )}
+              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-wrap justify-center md:justify-between items-center gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                   <div className="flex items-center gap-2 text-white font-serif text-2xl font-bold italic">
                     <span>Neema Sacco</span>
@@ -92,7 +103,18 @@ export default function App() {
             <Listings />
             
             {/* Call to Action Section */}
-            <section className="py-20 bg-kayolla-red relative overflow-hidden">
+            <section className="relative py-20 bg-kayolla-red overflow-hidden">
+              {data?.config?.cta?.backgroundImage && (
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={data.config.cta.backgroundImage}
+                    alt=""
+                    className="w-full h-full object-cover opacity-38"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-kayolla-red/70 via-kayolla-red/55 to-kayolla-red/75" />
+                </div>
+              )}
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
               </div>
@@ -150,4 +172,3 @@ export default function App() {
     </AnimatePresence>
   );
 }
-

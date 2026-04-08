@@ -24,16 +24,16 @@ export default function Hero() {
   const config = data?.config;
 
   return (
-    <section id="home" className="relative h-screen flex items-center overflow-hidden bg-kayolla-gray pt-20">
+    <section id="home" className="relative h-screen flex items-center overflow-hidden pt-20 bg-transparent">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src={config?.hero?.backgroundImage || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"}
           alt="Modern Real Estate"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-35"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-kayolla-gray via-kayolla-gray/90 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-kayolla-gray/85 via-kayolla-gray/55 to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -79,7 +79,18 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-8 border-t border-kayolla-black/5 pt-8">
+            <div className="mt-12 grid grid-cols-3 gap-8 border-t border-kayolla-black/5 pt-8 relative">
+              {config?.hero?.statsBackgroundImage && (
+                <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden">
+                  <img
+                    src={config.hero.statsBackgroundImage}
+                    alt=""
+                    className="w-full h-full object-cover opacity-12"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-kayolla-gray/70" />
+                </div>
+              )}
               <div>
                 <p className="text-3xl font-serif font-bold text-kayolla-red">500+</p>
                 <p className="text-xs text-kayolla-black/50 font-bold uppercase tracking-wider">Properties Managed</p>

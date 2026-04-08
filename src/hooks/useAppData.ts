@@ -10,6 +10,7 @@ interface SiteConfig {
     title: string;
     subtitle: string;
     backgroundImage: string;
+    statsBackgroundImage?: string;
   };
   about: {
     title: string;
@@ -28,6 +29,18 @@ interface SiteConfig {
   listings: {
     backgroundImage?: string;
   };
+  trustBar?: {
+    backgroundImage?: string;
+  };
+  cta?: {
+    backgroundImage?: string;
+  };
+  testimonials?: {
+    backgroundImage?: string;
+  };
+  officeMap?: {
+    backgroundImage?: string;
+  };
   contact: {
     title: string;
     description: string;
@@ -36,6 +49,7 @@ interface SiteConfig {
   footer: {
     description: string;
     backgroundImage: string;
+    linksBackgroundImage?: string;
   };
   socialLinks: {
     facebook: string;
@@ -63,6 +77,8 @@ interface AppData {
   config: SiteConfig;
 }
 
+const LOCAL_APP_DATA_KEY = "kayolla.appData";
+
 export function useAppData() {
   const [data, setData] = useState<AppData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -75,7 +91,17 @@ export function useAppData() {
       const json = await res.json();
       setData(json);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error");
+      try {
+        const local = JSON.parse(localStorage.getItem(LOCAL_APP_DATA_KEY) || "null");
+        if (local) {
+          setData(local);
+          setError(null);
+        } else {
+          setError(err instanceof Error ? err.message : "Unknown error");
+        }
+      } catch {
+        setError(err instanceof Error ? err.message : "Unknown error");
+      }
     } finally {
       setLoading(false);
     }

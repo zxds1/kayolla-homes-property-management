@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { MapPin, Navigation, Phone, Clock } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import { useAppData } from "../hooks/useAppData";
 
 // Fix for default marker icons in Leaflet with React
 const DefaultIcon = L.icon({
@@ -14,19 +15,33 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 export default function OfficeMap() {
+  const { data } = useAppData();
+  const config = data?.config;
   // Mombasa coordinates for the office
   const officeCoords: [number, number] = [-4.0435, 39.6682];
 
   return (
-    <section id="locations" className="py-24 bg-kayolla-gray overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="locations" className="relative py-24 overflow-hidden bg-transparent">
+      {config?.officeMap?.backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={config.officeMap.backgroundImage}
+            className="w-full h-full object-cover opacity-25"
+            alt=""
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-kayolla-black/20 via-transparent to-kayolla-black/15" />
+        </div>
+      )}
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-12 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-1 bg-white p-12 rounded-[3rem] shadow-xl border border-kayolla-black/5 flex flex-col justify-between"
+            className="lg:col-span-1 bg-white/28 backdrop-blur-sm p-12 rounded-[3rem] shadow-xl border border-white/20 flex flex-col justify-between"
           >
             <div>
               <p className="text-xs font-bold text-kayolla-red uppercase tracking-[0.3em] mb-4">Our Presence</p>
@@ -79,7 +94,7 @@ export default function OfficeMap() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-2 relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white min-h-[500px] z-0"
+            className="lg:col-span-2 relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/20 min-h-[500px] z-0"
           >
             <MapContainer 
               center={officeCoords} 
@@ -100,7 +115,7 @@ export default function OfficeMap() {
             </MapContainer>
             
             {/* Map Overlay for branding */}
-            <div className="absolute inset-0 pointer-events-none border-[20px] border-white/10 rounded-[3rem] z-10" />
+            <div className="absolute inset-0 pointer-events-none border-[20px] border-white/5 rounded-[3rem] z-10" />
           </motion.div>
         </div>
       </div>

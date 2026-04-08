@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Facebook, Twitter, Instagram, Linkedin, ArrowUp } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import Logo from "./Logo";
 import { useAppData } from "../hooks/useAppData";
 
@@ -7,21 +7,17 @@ export default function Footer() {
   const { data } = useAppData();
   const config = data?.config;
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="relative bg-kayolla-black pt-24 pb-12 text-white overflow-hidden">
       {config?.footer?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
             src={config.footer.backgroundImage} 
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-20"
             alt=""
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-kayolla-black via-kayolla-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-kayolla-black via-kayolla-black/70 to-transparent" />
         </div>
       )}
       
@@ -53,7 +49,18 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="relative">
+            {config?.footer?.linksBackgroundImage && (
+            <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden">
+                <img
+                  src={config.footer.linksBackgroundImage}
+                  alt=""
+                  className="w-full h-full object-cover opacity-22"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-kayolla-black/65" />
+              </div>
+            )}
             <h4 className="text-lg font-serif font-bold mb-8">Quick Links</h4>
             <ul className="space-y-4">
               {["Home", "Services", "About", "Contact", "Privacy Policy"].map((link) => (
@@ -79,7 +86,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all"
+              className="w-full px-6 py-4 bg-white/12 backdrop-blur-sm border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-kayolla-red/20 focus:border-kayolla-red transition-all"
                 aria-label="Email address for newsletter"
                 required
               />
@@ -99,14 +106,6 @@ export default function Footer() {
             <p className="text-white/40 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Kayolla Homes Property Management. All rights reserved.
             </p>
-            
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-3 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-full text-sm font-bold transition-all border border-white/10 group"
-            >
-              <span>Back to Top</span>
-              <ArrowUp size={16} className="group-hover:-translate-y-1 transition-transform" />
-            </button>
           </div>
 
           <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/30 text-center">
