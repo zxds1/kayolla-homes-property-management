@@ -4,44 +4,22 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { useAppData } from "../hooks/useAppData";
 
-interface BeforeInstallPromptEvent extends Event {
-  readonly platforms: string[];
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
-}
-
 export default function Navbar() {
   const { data } = useAppData();
   const config = data?.config;
   const [isOpen, setIsOpen] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallNudge, setShowInstallNudge] = useState(true);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (event: Event) => {
-      event.preventDefault();
-      setDeferredPrompt(event as BeforeInstallPromptEvent);
-    };
-
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-
     const timeout = window.setTimeout(() => setShowInstallNudge(false), 12000);
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.clearTimeout(timeout);
     };
   }, []);
 
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) {
-      window.alert("Install is available from your browser menu if the prompt has already been dismissed.");
-      return;
-    }
-
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    setDeferredPrompt(null);
+  const handleInstallClick = () => {
+    window.alert("Use your browser menu to install this app. This button only shows the prompt.");
     setShowInstallNudge(false);
   };
 
@@ -83,7 +61,7 @@ export default function Navbar() {
               aria-label="Install the app"
             >
               <Download size={16} />
-              <span>Download App</span>
+              <span>App Info</span>
             </button>
             <a
               href={`tel:${config?.supportPhone || "0737510006"}`}
@@ -138,7 +116,7 @@ export default function Navbar() {
                 className="mt-4 flex items-center justify-center gap-2 w-full py-4 bg-kayolla-black text-white rounded-xl text-base font-semibold"
               >
                 <Download size={18} />
-                <span>Download App</span>
+                <span>App Info</span>
               </button>
               <div className="pt-4">
                 <a
