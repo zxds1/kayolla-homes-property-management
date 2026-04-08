@@ -50,6 +50,7 @@ export interface SiteConfig {
     backgroundImage: string;
     linksBackgroundImage?: string;
   };
+  propertyTypeFilters: string[];
   socialLinks: {
     facebook: string;
     instagram: string;
@@ -107,6 +108,17 @@ export const defaultAppData: AppData = {
     listings: {
       backgroundImage: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1920&q=80",
     },
+    propertyTypeFilters: [
+      "Apartment",
+      "House",
+      "Land",
+      "Commercial",
+      "Bedsitter",
+      "Single Room",
+      "One B",
+      "2B",
+      "Hostel",
+    ],
     trustBar: {
       backgroundImage: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1920&q=80",
     },

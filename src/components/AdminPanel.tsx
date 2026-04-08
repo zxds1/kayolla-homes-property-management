@@ -18,7 +18,8 @@ import {
   LayoutDashboard,
   Building2,
   Globe, 
-  DollarSign
+  DollarSign,
+  Filter
 } from "lucide-react";
 import { Property } from "../data/listings";
 import { auth, googleProvider, allowedAdminEmails, isFirebaseConfigured } from "../lib/firebase";
@@ -69,6 +70,7 @@ interface SiteConfig {
     backgroundImage: string;
     linksBackgroundImage?: string;
   };
+  propertyTypeFilters: string[];
   socialLinks: {
     facebook: string;
     instagram: string;
@@ -614,6 +616,55 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                       onChange={(url) => handleSaveConfig({ ...data.config, listings: { ...data.config.listings, backgroundImage: url } })}
                       getAuthToken={getAuthToken}
                     />
+                  </div>
+                </div>
+
+                {/* Property Type Filters Config */}
+                <div className="pt-12 border-t border-kayolla-black/5 space-y-6">
+                  <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
+                    <Filter className="text-kayolla-red" size={20} />
+                    Property Type Filters
+                  </h3>
+                  <p className="text-sm text-kayolla-black/40">
+                    Control the chips shown below the listings search bar. Add, remove, or rename types here.
+                  </p>
+                  <div className="space-y-4">
+                    {(data.config.propertyTypeFilters || []).map((filterLabel, index) => (
+                      <div key={`${filterLabel}-${index}`} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-center rounded-2xl border border-kayolla-black/10 bg-white p-3">
+                        <input
+                          type="text"
+                          value={filterLabel}
+                          onChange={(e) => {
+                            const nextFilters = [...(data.config.propertyTypeFilters || [])];
+                            nextFilters[index] = e.target.value;
+                            handleSaveConfig({ ...data.config, propertyTypeFilters: nextFilters });
+                          }}
+                          className="w-full p-4 bg-kayolla-gray rounded-2xl border-none focus:ring-2 focus:ring-kayolla-red transition-all font-bold"
+                          placeholder="Apartment, 3B, Commercial, etc."
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const nextFilters = (data.config.propertyTypeFilters || []).filter((_, currentIndex) => currentIndex !== index);
+                            handleSaveConfig({ ...data.config, propertyTypeFilters: nextFilters.length > 0 ? nextFilters : ["Apartment"] });
+                          }}
+                          className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-700 hover:bg-rose-100 transition-all"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => handleSaveConfig({
+                        ...data.config,
+                        propertyTypeFilters: [...(data.config.propertyTypeFilters || []), "New Type"],
+                      })}
+                      className="inline-flex items-center gap-2 rounded-2xl bg-kayolla-black px-4 py-3 text-sm font-semibold text-white hover:bg-kayolla-red transition-all"
+                    >
+                      <Plus size={16} />
+                      Add Type Filter
+                    </button>
                   </div>
                 </div>
 

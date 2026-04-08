@@ -13,7 +13,7 @@ export default function Listings() {
   const { data, loading } = useAppData();
   const config = data?.config;
   const [viewMode, setViewMode] = useState<"grid" | "map">("grid");
-  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [activeFilters, setActiveFilters] = useState<string[]>(["All"]);
   const [sortBy, setSortBy] = useState<string>("newest");
   const [selectedForComparison, setSelectedForComparison] = useState<Property[]>([]);
   const [isComparing, setIsComparing] = useState(false);
@@ -36,15 +36,40 @@ export default function Listings() {
     maxPrice: 50000000,
   });
 
-  const propertyTypes = ["All", "Apartment", "House", "Land", "Commercial", "Bedsitter", "Single Room", "One B", "2B", "Hostel"];
+  const propertyTypes = useMemo(() => {
+    const configured = config?.propertyTypeFilters?.filter((item) => item && item.trim().toLowerCase() !== "all") ?? [
+      "Apartment",
+      "House",
+      "Land",
+      "Commercial",
+      "Bedsitter",
+      "Single Room",
+      "One B",
+      "2B",
+      "Hostel",
+    ];
+    return ["All", ...Array.from(new Set(configured))];
+  }, [config]);
 
   const [searchResults, setSearchResults] = useState<Property[] | null>(null);
+
+  const togglePropertyFilter = (type: string) => {
+    setActiveFilters((current) => {
+      if (type === "All") return ["All"];
+      const withoutAll = current.filter((item) => item !== "All");
+      if (withoutAll.includes(type)) {
+        const next = withoutAll.filter((item) => item !== type);
+        return next.length > 0 ? next : ["All"];
+      }
+      return [...withoutAll, type];
+    });
+  };
 
   const filteredListings = useMemo(() => {
     if (!data) return [];
     const source = searchResults || data.listings;
     let results = source.filter(p => {
-      const matchesType = activeFilter === "All" || p.type === activeFilter;
+      const matchesType = activeFilters.includes("All") || activeFilters.includes(p.type);
       const matchesBedrooms = filters.bedrooms === 0 || (p.bedrooms && p.bedrooms >= filters.bedrooms);
       const matchesBathrooms = filters.bathrooms === 0 || (p.bathrooms && p.bathrooms >= filters.bathrooms);
       const matchesPrice = p.priceValue >= filters.minPrice && p.priceValue <= filters.maxPrice;
@@ -61,7 +86,7 @@ export default function Listings() {
     });
 
     return results;
-  }, [activeFilter, filters, sortBy, data]);
+  }, [activeFilters, filters, sortBy, data]);
 
   if (loading) return (
     <div className="py-24 bg-kayolla-gray flex items-center justify-center">
@@ -195,18 +220,18 @@ export default function Listings() {
           {/* View Toggle and Basic Filters */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
             <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-              <div className="flex md:flex-wrap justify-start gap-3 min-w-max md:min-w-0" role="tablist" aria-label="Property type filters">
+              <div className="flex flex-nowrap gap-3 min-w-max md:min-w-0" role="tablist" aria-label="Property type filters">
                 {propertyTypes.map((type) => (
                   <button
                     key={type}
-                    onClick={() => setActiveFilter(type)}
+                    onClick={() => togglePropertyFilter(type)}
                     className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 border ${
-                      activeFilter === type
+                      activeFilters.includes(type)
                         ? "bg-kayolla-red text-white border-kayolla-red shadow-lg shadow-kayolla-red/20"
                         : "bg-white/20 text-kayolla-black border-white/20 hover:border-kayolla-red/20"
                     }`}
                     role="tab"
-                    aria-selected={activeFilter === type}
+                    aria-selected={activeFilters.includes(type)}
                   >
                     {type}
                   </button>
