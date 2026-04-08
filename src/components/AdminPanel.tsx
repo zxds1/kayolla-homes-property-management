@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { Property } from "../data/listings";
 import { auth, googleProvider, allowedAdminEmails, isFirebaseConfigured } from "../lib/firebase";
+import { defaultAppData, type AppData as DefaultAppData } from "../data/defaultAppData";
 import { onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 
 interface SiteConfig {
@@ -177,15 +178,20 @@ function ImageUploadField({
   );
 }
 
-interface AppData {
-  listings: Property[];
-  config: SiteConfig;
-}
-
 const LOCAL_APP_DATA_KEY = "kayolla.appData";
 
 export default function AdminPanel({ onClose }: { onClose: () => void }) {
-  const [data, setData] = useState<AppData | null>(null);
+  const [data, setData] = useState<DefaultAppData | null>(() => {
+    if (!isFirebaseConfigured) {
+      try {
+        const raw = localStorage.getItem(LOCAL_APP_DATA_KEY);
+        return raw ? (JSON.parse(raw) as DefaultAppData) : defaultAppData;
+      } catch {
+        return defaultAppData;
+      }
+    }
+    return null;
+  });
   const [activeTab, setActiveTab] = useState<"listings" | "config">("listings");
   const [editingProperty, setEditingProperty] = useState<Property | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -229,6 +235,16 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
   }, []);
 
   const fetchData = async () => {
+    if (!isFirebaseConfigured) {
+      try {
+        const local = JSON.parse(localStorage.getItem(LOCAL_APP_DATA_KEY) || "null");
+        setData(local || defaultAppData);
+      } catch {
+        setData(defaultAppData);
+      }
+      return;
+    }
+
     try {
       const res = await fetch("/api/data");
       const json = await res.json();
@@ -237,27 +253,27 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
       console.error("Failed to fetch data", error);
       try {
         const local = JSON.parse(localStorage.getItem(LOCAL_APP_DATA_KEY) || "null");
-        if (local) {
-          setData(local);
-        }
+        setData(local || defaultAppData);
       } catch {
-        // Ignore local parsing errors and keep the current in-memory state.
+        setData(defaultAppData);
       }
     }
   };
 
-  const saveData = async (newData: AppData) => {
+  const saveData = async (newData: DefaultAppData) => {
     setIsSaving(true);
     try {
-      const token = await authUser?.getIdToken?.();
-      await fetch("/api/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify(newData),
-      });
+      if (isFirebaseConfigured) {
+        const token = await authUser?.getIdToken?.();
+        await fetch("/api/data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify(newData),
+        });
+      }
       setData(newData);
       localStorage.setItem(LOCAL_APP_DATA_KEY, JSON.stringify(newData));
       setEditingProperty(null);
