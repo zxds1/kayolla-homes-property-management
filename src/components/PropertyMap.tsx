@@ -38,7 +38,7 @@ export default function PropertyMap({ properties, onSelect }: PropertyMapProps) 
   const center: [number, number] = [-4.0435, 39.6682];
 
   return (
-    <div className="relative w-full h-[600px] bg-kayolla-gray rounded-[3rem] overflow-hidden border border-kayolla-black/5 shadow-inner z-0">
+    <div className="relative z-0 h-[360px] w-full overflow-hidden rounded-[1.75rem] border border-kayolla-black/5 bg-kayolla-gray shadow-inner sm:h-[600px] sm:rounded-[3rem]">
       <MapContainer 
         center={center} 
         zoom={13} 

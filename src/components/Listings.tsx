@@ -111,7 +111,7 @@ export default function Listings() {
   };
 
   return (
-    <section id="listings" className="relative py-24 overflow-hidden bg-transparent">
+    <section id="listings" className="relative overflow-hidden bg-transparent py-16 sm:py-24">
       {config?.listings?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
@@ -125,7 +125,7 @@ export default function Listings() {
       )}
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export default function Listings() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-kayolla-black mb-12"
+            className="mb-10 text-3xl font-serif font-bold text-kayolla-black sm:text-4xl md:text-5xl"
           >
             Find Your <span className="italic">Dream Property</span> in Mombasa
           </motion.h2>
@@ -179,7 +179,7 @@ export default function Listings() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.05 }}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="bg-white/28 backdrop-blur-sm p-6 rounded-[2rem] border border-white/20 shadow-sm hover:shadow-xl transition-all group cursor-default"
+                    className="group cursor-default rounded-[2rem] border border-white/20 bg-white/28 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-xl sm:p-6"
                   >
                     <p className="text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest mb-2 group-hover:text-kayolla-red transition-colors">{type}</p>
                     <div className="flex flex-col">
@@ -218,7 +218,7 @@ export default function Listings() {
           </motion.div>
 
           {/* View Toggle and Basic Filters */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
+          <div className="mb-12 flex flex-col items-stretch justify-between gap-6 md:flex-row md:items-center">
             <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
               <div className="flex flex-nowrap gap-3 min-w-max md:min-w-0" role="tablist" aria-label="Property type filters">
                 {propertyTypes.map((type) => (
@@ -302,7 +302,7 @@ export default function Listings() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden mb-12"
               >
-                <div className="bg-white/20 backdrop-blur-sm p-8 rounded-[2.5rem] shadow-xl border border-white/20 grid md:grid-cols-4 gap-8">
+                <div className="grid gap-6 rounded-[2.5rem] border border-white/20 bg-white/20 p-6 shadow-xl backdrop-blur-sm md:grid-cols-4 sm:p-8">
                   <div className="space-y-3">
                     <label className="flex items-center gap-2 text-xs font-bold text-kayolla-black/50 uppercase tracking-widest ml-1">
                       <Bed size={14} />

@@ -392,9 +392,9 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] bg-kayolla-gray overflow-hidden flex flex-col md:flex-row" role="dialog" aria-modal="true" aria-labelledby="admin-panel-title">
+    <div className="fixed inset-0 z-[100] flex flex-col overflow-hidden bg-kayolla-gray md:flex-row" role="dialog" aria-modal="true" aria-labelledby="admin-panel-title">
       {/* Sidebar */}
-      <div className="w-full md:w-64 bg-kayolla-black text-white p-6 flex flex-col gap-8">
+      <div className="flex w-full flex-col gap-6 bg-kayolla-black p-5 text-white md:w-64 md:gap-8 md:p-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-kayolla-red rounded-xl flex items-center justify-center">
             <Settings className="text-white" size={20} />
@@ -436,14 +436,14 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto p-6 md:p-12">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-12">
         <div className="max-w-5xl mx-auto">
           {activeTab === "listings" ? (
             <div className="space-y-8">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                 <div>
-                  <h2 className="text-4xl font-serif font-bold text-kayolla-black">Property <span className="italic">Listings</span></h2>
-                  <p className="text-kayolla-black/40 font-medium">Manage your real estate portfolio</p>
+                  <h2 className="text-3xl font-serif font-bold text-kayolla-black sm:text-4xl">Property <span className="italic">Listings</span></h2>
+                  <p className="text-sm font-medium text-kayolla-black/40 sm:text-base">Manage your real estate portfolio</p>
                 </div>
                 <button 
                   onClick={() => setEditingProperty({
@@ -468,16 +468,16 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 gap-4">
-                {data.listings.map((listing) => (
-                  <div key={listing.id} className="bg-white p-4 rounded-[2rem] border border-kayolla-black/5 flex items-center gap-6 group hover:shadow-xl transition-all">
+                <div className="grid grid-cols-1 gap-4">
+                  {data.listings.map((listing) => (
+                  <div key={listing.id} className="group flex flex-col gap-4 rounded-[1.5rem] border border-kayolla-black/5 bg-white p-4 transition-all hover:shadow-xl sm:flex-row sm:gap-6">
                     <img src={listing.image} className="w-24 h-24 rounded-2xl object-cover" alt="" />
                     <div className="flex-1">
                       <p className="text-[10px] font-bold text-kayolla-red uppercase tracking-widest mb-1">{listing.type}</p>
                       <h3 className="font-serif font-bold text-kayolla-black text-lg">{listing.title}</h3>
                       <p className="text-sm text-kayolla-black/40">{listing.location}</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 self-end sm:self-auto">
                       <button 
                         onClick={() => setEditingProperty(listing)}
                         className="p-3 bg-kayolla-gray rounded-xl hover:bg-kayolla-black hover:text-white transition-all"
@@ -500,18 +500,18 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
           ) : (
             <div className="space-y-8">
               <div>
-                <h2 className="text-4xl font-serif font-bold text-kayolla-black">Site <span className="italic">Configuration</span></h2>
-                <p className="text-kayolla-black/40 font-medium">Global settings and contact information</p>
+                <h2 className="text-3xl font-serif font-bold text-kayolla-black sm:text-4xl">Site <span className="italic">Configuration</span></h2>
+                <p className="text-sm font-medium text-kayolla-black/40 sm:text-base">Global settings and contact information</p>
               </div>
 
-              <div className="bg-white p-8 md:p-12 rounded-[3rem] border border-kayolla-black/5 space-y-12">
+              <div className="space-y-10 rounded-[1.75rem] border border-kayolla-black/5 bg-white p-5 sm:rounded-[3rem] sm:p-8 md:p-12">
                 {/* Hero Section Config */}
                 <div className="space-y-6">
                   <h3 className="text-xl font-serif font-bold text-kayolla-black flex items-center gap-3">
                     <ImageIcon className="text-kayolla-red" size={20} />
                     Hero Section
                   </h3>
-                  <div className="grid grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 gap-5 sm:gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-kayolla-black/40 uppercase tracking-widest">Hero Title</label>
                       <input 
@@ -551,7 +551,7 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                     <Building2 className="text-kayolla-red" size={20} />
                     About Section
                   </h3>
-                  <div className="grid grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 gap-5 sm:gap-6">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-kayolla-black/40 uppercase tracking-widest">About Title</label>
                       <input 
@@ -803,7 +803,7 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                     <LayoutDashboard className="text-kayolla-red" size={20} />
                     General Information
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 sm:gap-8">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-kayolla-black/40 uppercase tracking-widest">Agency Name</label>
                       <input 
@@ -1129,12 +1129,12 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
       {/* Edit Listing Modal */}
       <AnimatePresence>
         {editingProperty && (
-          <div className="fixed inset-0 z-[110] bg-kayolla-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+      <div className="fixed inset-0 z-[110] flex items-center justify-center bg-kayolla-black/60 p-3 backdrop-blur-sm sm:p-4" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[3rem] shadow-2xl p-8 md:p-12"
+              className="max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-[1.75rem] bg-white p-5 shadow-2xl sm:rounded-[3rem] sm:p-8 md:p-12"
             >
               <div className="flex justify-between items-center mb-8">
                 <h2 id="edit-modal-title" className="text-3xl font-serif font-bold text-kayolla-black">
@@ -1145,7 +1145,7 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 sm:gap-8">
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest">Property Title</label>
@@ -1156,7 +1156,7 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                       className="w-full p-4 bg-kayolla-gray rounded-2xl border-none focus:ring-2 focus:ring-kayolla-red transition-all font-bold"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest">Type</label>
                       <select 
@@ -1262,7 +1262,7 @@ export default function AdminPanel({ onClose }: { onClose: () => void }) {
                       getAuthToken={getAuthToken}
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest">Latitude</label>
                       <input 

@@ -76,7 +76,7 @@ export default function PropertyComparison({ selectedProperties, onRemove, onClo
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 100 }}
-      className="fixed inset-x-0 bottom-0 z-[60] bg-white shadow-[0_-20px_50px_rgba(0,0,0,0.1)] border-t border-kayolla-black/5 p-6 md:p-10 max-h-[80vh] overflow-y-auto rounded-t-[3rem]"
+      className="fixed inset-x-0 bottom-0 z-[60] max-h-[85vh] overflow-y-auto rounded-t-[2rem] border-t border-kayolla-black/5 bg-white p-4 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] md:max-h-[80vh] md:rounded-t-[3rem] md:p-10"
       role="dialog"
       aria-modal="true"
       aria-labelledby="comparison-title"

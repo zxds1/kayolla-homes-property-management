@@ -3,8 +3,8 @@ import Logo from "./Logo";
 
 export default function StartupScreen() {
   return (
-    <div className="fixed inset-0 z-[200] bg-kayolla-gray flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-[3rem] shadow-2xl border border-kayolla-black/5 p-8 md:p-10 text-center overflow-hidden relative">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-kayolla-gray px-4">
+      <div className="relative w-full max-w-md overflow-hidden rounded-[2rem] border border-kayolla-black/5 bg-white p-6 text-center shadow-2xl sm:rounded-[3rem] sm:p-8 md:p-10">
         <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-kayolla-red via-kayolla-black to-kayolla-red" />
         <div className="flex justify-center mb-8">
           <Logo />

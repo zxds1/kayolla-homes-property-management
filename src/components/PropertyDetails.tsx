@@ -15,7 +15,7 @@ export default function PropertyDetails({ property, onClose, onScheduleViewing }
   const viewingFee = data?.config?.viewingFee || 300;
 
   return (
-    <div className="fixed inset-0 z-[120] bg-kayolla-black/60 backdrop-blur-md flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+    <div className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-kayolla-black/60 p-3 backdrop-blur-md md:p-8">
       <Helmet>
         <title>{property.title} | Kayolla Homes</title>
         <meta name="description" content={property.description} />
@@ -33,14 +33,14 @@ export default function PropertyDetails({ property, onClose, onScheduleViewing }
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="bg-white w-full max-w-6xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row relative"
+        className="relative flex w-full max-w-6xl flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-2xl md:flex-row md:rounded-[3rem]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="property-details-title"
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 p-3 bg-white/90 backdrop-blur-md rounded-full text-kayolla-black hover:bg-kayolla-red hover:text-white transition-all shadow-lg"
+          className="absolute right-4 top-4 z-10 rounded-full bg-white/90 p-3 text-kayolla-black shadow-lg backdrop-blur-md transition-all hover:bg-kayolla-red hover:text-white md:right-6 md:top-6"
           aria-label="Close details"
         >
           <X size={24} />
@@ -72,16 +72,16 @@ export default function PropertyDetails({ property, onClose, onScheduleViewing }
         </div>
 
         {/* Content Section */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto max-h-[90vh] md:max-h-[800px]">
+        <div className="w-full max-h-[90vh] overflow-y-auto p-6 md:w-1/2 md:max-h-[800px] md:p-12">
           <div className="flex items-center gap-2 text-kayolla-red text-xs font-bold uppercase tracking-widest mb-4">
             <MapPin size={14} />
             <span>{property.location}</span>
           </div>
-          <h2 id="property-details-title" className="text-3xl md:text-4xl font-serif font-bold text-kayolla-black mb-6 leading-tight">
+          <h2 id="property-details-title" className="mb-5 text-2xl font-serif font-bold leading-tight text-kayolla-black sm:text-3xl md:text-4xl">
             {property.title}
           </h2>
           
-          <div className="grid grid-cols-3 gap-6 mb-8 py-6 border-y border-kayolla-black/5">
+          <div className="mb-8 grid grid-cols-3 gap-4 border-y border-kayolla-black/5 py-6 sm:gap-6">
             {property.bedrooms && (
               <div className="flex flex-col items-center gap-2">
                 <Bed size={20} className="text-kayolla-red" />

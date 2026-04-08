@@ -8,7 +8,7 @@ export default function Footer() {
   const config = data?.config;
 
   return (
-    <footer className="relative bg-kayolla-black pt-24 pb-12 text-white overflow-hidden">
+    <footer className="relative overflow-hidden bg-kayolla-black pt-16 pb-12 text-white sm:pt-24">
       {config?.footer?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img 
@@ -21,14 +21,14 @@ export default function Footer() {
         </div>
       )}
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-4 gap-12 mb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 grid gap-10 lg:grid-cols-4 lg:gap-12">
           <div className="lg:col-span-2">
             <Logo className="mb-8 invert brightness-0" />
             <p className="text-white/60 text-lg max-w-md mb-8 leading-relaxed">
               {config?.footer?.description || "Your premier partner for comprehensive property management, real estate investment, and construction services in Kenya. We turn houses into homes and investments into wealth."}
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               {[
                 { Icon: Facebook, href: config?.socialLinks.facebook || "https://facebook.com/kayollahomes", label: "Facebook" },
                 { Icon: Twitter, href: config?.socialLinks.twitter || "https://twitter.com/kayollahomes", label: "Twitter" },
@@ -101,11 +101,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-12 md:flex-row">
           <p className="text-white/40 text-sm text-center md:text-left">
             © {new Date().getFullYear()} Kayolla Homes Property Management. All rights reserved.
           </p>
-          <div className="flex items-center gap-3 group">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center group">
             <span className="text-white/40">Developed by</span>
             <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full hover:bg-slate-50 transition-all border border-slate-200">
               <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center p-1">

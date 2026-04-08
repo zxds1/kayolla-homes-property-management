@@ -90,14 +90,14 @@ export default function PropertySearch({ listings, onResults }: PropertySearchPr
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setShowCriteria(false)}
-                className="fixed inset-0 bg-kayolla-black/20 backdrop-blur-sm z-40 md:hidden"
+                className="fixed inset-0 z-40 bg-kayolla-black/20 backdrop-blur-sm md:hidden"
               />
               
               <motion.div
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute top-full left-0 right-0 mt-4 bg-white rounded-[2.5rem] shadow-2xl border border-kayolla-black/5 p-8 z-50 overflow-hidden"
+                className="absolute left-0 right-0 top-full z-50 mt-4 overflow-hidden rounded-[1.75rem] border border-kayolla-black/5 bg-white p-5 shadow-2xl sm:rounded-[2.5rem] sm:p-8"
               >
                 <div className="flex justify-between items-center mb-6 md:hidden">
                   <h3 className="text-lg font-serif font-bold">Search Filters</h3>
@@ -106,7 +106,7 @@ export default function PropertySearch({ listings, onResults }: PropertySearchPr
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3 sm:gap-8">
                   <div className="space-y-4">
                     <label className="flex items-center gap-2 text-[10px] font-bold text-kayolla-black/40 uppercase tracking-widest">
                       <Bed size={14} className="text-kayolla-red" />

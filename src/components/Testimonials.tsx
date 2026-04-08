@@ -28,7 +28,7 @@ export default function Testimonials() {
   const config = data?.config;
 
   return (
-    <section id="testimonials" className="relative py-24 overflow-hidden bg-transparent">
+    <section id="testimonials" className="relative overflow-hidden bg-transparent py-16 sm:py-24">
       {config?.testimonials?.backgroundImage && (
         <div className="absolute inset-0 z-0">
           <img
@@ -42,7 +42,7 @@ export default function Testimonials() {
       )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,13 +56,13 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-kayolla-black mb-6"
+            className="mb-5 text-3xl font-serif font-bold text-kayolla-black sm:text-4xl md:text-5xl"
           >
             What Our <span className="italic">Clients Say</span>
           </motion.h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-6 md:grid-cols-3 sm:gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -70,7 +70,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="relative p-10 bg-white/28 backdrop-blur-sm rounded-[3rem] border border-white/20 hover:border-kayolla-red/20 hover:bg-white/38 hover:shadow-2xl transition-all duration-300"
+              className="relative rounded-[2rem] border border-white/20 bg-white/28 p-6 backdrop-blur-sm transition-all duration-300 hover:border-kayolla-red/20 hover:bg-white/38 hover:shadow-2xl sm:rounded-[3rem] sm:p-10"
             >
               <div className="absolute top-8 right-8 text-kayolla-red/10">
                 <Quote size={64} />

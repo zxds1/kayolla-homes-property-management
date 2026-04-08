@@ -60,7 +60,7 @@ export default function ViewingScheduler({ property, onClose }: ViewingScheduler
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-kayolla-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[150] flex items-center justify-center bg-kayolla-black/60 p-3 backdrop-blur-sm sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="scheduler-title"
@@ -69,19 +69,19 @@ export default function ViewingScheduler({ property, onClose }: ViewingScheduler
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        className="bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl overflow-hidden relative"
+        className="relative w-full max-w-2xl overflow-hidden rounded-[1.75rem] bg-white shadow-2xl sm:rounded-[3rem]"
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 bg-kayolla-gray rounded-full hover:bg-kayolla-red hover:text-white transition-all z-10"
+          className="absolute right-4 top-4 z-10 rounded-full bg-kayolla-gray p-2 transition-all hover:bg-kayolla-red hover:text-white sm:right-6 sm:top-6"
           aria-label="Close scheduler"
         >
           <X size={20} />
         </button>
 
-        <div className="grid md:grid-cols-5 h-full">
+        <div className="grid h-full md:grid-cols-5">
           {/* Left Sidebar - Property Info */}
-          <div className="md:col-span-2 bg-kayolla-gray p-8 flex flex-col justify-between">
+          <div className="flex flex-col justify-between bg-kayolla-gray p-6 md:col-span-2 md:p-8">
             <div>
               <p className="text-xs font-bold text-kayolla-red uppercase tracking-[0.2em] mb-4">Schedule Viewing</p>
               <h3 id="scheduler-title" className="text-2xl font-serif font-bold text-kayolla-black mb-4 leading-tight">

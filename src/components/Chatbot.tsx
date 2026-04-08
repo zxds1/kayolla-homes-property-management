@@ -65,7 +65,7 @@ export default function Chatbot() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-24 w-14 h-14 bg-kayolla-red text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all z-40 group"
+        className="fixed bottom-4 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-kayolla-red text-white shadow-2xl transition-all hover:scale-110 sm:bottom-8 sm:right-24 group"
       >
         <MessageSquare size={24} className="group-hover:rotate-12 transition-transform" />
         <span className="absolute -top-2 -right-2 w-5 h-5 bg-kayolla-black text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
@@ -79,7 +79,7 @@ export default function Chatbot() {
             initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-28 right-8 w-[90vw] md:w-[400px] h-[600px] bg-white rounded-[2.5rem] shadow-2xl z-50 flex flex-col overflow-hidden border border-kayolla-black/5"
+            className="fixed bottom-24 right-4 z-50 flex h-[72vh] max-h-[600px] w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-[2rem] border border-kayolla-black/5 bg-white shadow-2xl sm:right-8 sm:w-[400px] sm:rounded-[2.5rem] sm:h-[600px]"
           >
             <div className="bg-kayolla-black p-6 text-white flex justify-between items-center">
               <div className="flex items-center gap-3">

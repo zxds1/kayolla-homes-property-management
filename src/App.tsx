@@ -162,7 +162,7 @@ export default function App() {
           {/* Admin Toggle Button (Hidden/Floating) */}
           <button 
             onClick={() => setShowAdmin(true)}
-            className="fixed bottom-8 right-8 w-12 h-12 bg-kayolla-black text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-kayolla-red transition-all z-50 group"
+            className="fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-kayolla-black text-white shadow-2xl transition-all hover:bg-kayolla-red sm:bottom-8 sm:right-8 group"
           >
             <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
           </button>

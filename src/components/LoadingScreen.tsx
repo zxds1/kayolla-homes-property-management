@@ -4,11 +4,11 @@ import Logo from "./Logo";
 
 export default function LoadingScreen({ label = "Loading" }: { label?: string }) {
   return (
-    <div className="fixed inset-0 z-[190] bg-kayolla-black/70 backdrop-blur-md flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-[190] flex items-center justify-center bg-kayolla-black/70 px-4 backdrop-blur-md">
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        className="w-full max-w-sm bg-white rounded-[2.5rem] shadow-2xl border border-white/10 p-8 text-center"
+        className="w-full max-w-sm rounded-[2rem] border border-white/10 bg-white p-6 text-center shadow-2xl sm:rounded-[2.5rem] sm:p-8"
       >
         <div className="flex justify-center mb-6">
           <Logo />

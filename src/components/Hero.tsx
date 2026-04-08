@@ -24,7 +24,7 @@ export default function Hero() {
   const config = data?.config;
 
   return (
-    <section id="home" className="relative h-screen flex items-center overflow-hidden pt-20 bg-transparent">
+    <section id="home" className="relative flex h-[100svh] items-center overflow-hidden bg-transparent pt-16 sm:pt-20">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -36,8 +36,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-kayolla-gray/85 via-kayolla-gray/55 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -49,7 +49,7 @@ export default function Hero() {
               <span>Trusted Since 2010</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-kayolla-black leading-[1.1] mb-6">
+            <h1 className="mb-5 text-4xl font-serif font-bold leading-[1.08] text-kayolla-black sm:text-5xl md:text-7xl">
               {config?.hero?.title ? (
                 <>{renderHeroTitle(config.hero.title)}</>
               ) : (
@@ -57,14 +57,14 @@ export default function Hero() {
               )}
             </h1>
             
-            <p className="text-lg text-kayolla-black/70 max-w-lg mb-10 leading-relaxed">
+            <p className="mb-8 max-w-lg text-base leading-relaxed text-kayolla-black/70 sm:text-lg">
               {config?.hero?.subtitle || "Kayolla Homes is your premier partner for comprehensive property management, real estate investment, and construction services in Kenya."}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-kayolla-red text-white rounded-full text-base font-bold hover:bg-kayolla-red/90 transition-all duration-300 shadow-xl shadow-kayolla-red/20 group"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-kayolla-red px-8 py-4 text-base font-bold text-white shadow-xl shadow-kayolla-red/20 transition-all duration-300 hover:bg-kayolla-red/90 sm:w-auto group"
                 aria-label="Get started with Kayolla Homes"
               >
                 <span>Get Started</span>
@@ -72,14 +72,14 @@ export default function Hero() {
               </a>
               <a
                 href="#services"
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-kayolla-black border border-kayolla-black/10 rounded-full text-base font-bold hover:bg-kayolla-gray transition-all duration-300"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-kayolla-black/10 bg-white px-8 py-4 text-base font-bold text-kayolla-black transition-all duration-300 hover:bg-kayolla-gray sm:w-auto"
                 aria-label="View our services"
               >
                 <span>Our Services</span>
               </a>
             </div>
 
-            <div className="mt-12 grid grid-cols-3 gap-8 border-t border-kayolla-black/5 pt-8 relative">
+            <div className="relative mt-12 grid grid-cols-3 gap-4 border-t border-kayolla-black/5 pt-8 sm:gap-8">
               {config?.hero?.statsBackgroundImage && (
                 <div className="absolute inset-0 -z-10 rounded-[2rem] overflow-hidden">
                   <img
@@ -111,7 +111,7 @@ export default function Hero() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="hidden lg:block relative"
+            className="relative hidden lg:block"
           >
             <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white">
               <img
