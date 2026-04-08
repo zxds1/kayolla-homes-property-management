@@ -1,0 +1,18 @@
+{
+  "name": "Kayolla Homes Property Management",
+  "short_name": "Kayolla Homes",
+  "description": "Property management, real estate, and construction services in Kenya.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFDFD",
+  "theme_color": "#800000",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
