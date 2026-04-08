@@ -101,16 +101,28 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/10 flex flex-col gap-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} Kayolla Homes Property Management. All rights reserved.
-            </p>
-          </div>
-
-          <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/30 text-center">
-            Developed by Trace Technologies
+        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-white/40 text-sm text-center md:text-left">
+            © {new Date().getFullYear()} Kayolla Homes Property Management. All rights reserved.
           </p>
+          <div className="flex items-center gap-3 group">
+            <span className="text-white/40">Developed by</span>
+            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full hover:bg-slate-50 transition-all border border-slate-200">
+              <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center p-1">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="#000" strokeWidth="2" />
+                  <circle cx="50" cy="30" r="8" fill="#000" />
+                  <circle cx="30" cy="65" r="8" fill="#000" />
+                  <circle cx="70" cy="65" r="8" fill="#000" />
+                  <path d="M50 30 L30 65 M50 30 L70 65 M30 65 L70 65" stroke="#000" strokeWidth="2" fill="none" />
+                </svg>
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-slate-900 font-black tracking-tighter text-xs">TRACE</span>
+                <span className="text-[6px] text-slate-700 uppercase tracking-[0.2em]">Technologies</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
