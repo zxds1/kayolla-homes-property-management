@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import * as LucideIcons from "lucide-react";
+import { Construction, Home, Key, Landmark, TrendingUp, Users, Wallet } from "lucide-react";
 import { useAppData } from "../hooks/useAppData";
 
 const defaultServices = [
@@ -45,6 +45,14 @@ export default function Services() {
   const { data } = useAppData();
   const services = data?.config?.services?.length ? data.config.services : defaultServices;
   const config = data?.config;
+  const iconMap = {
+    Wallet,
+    Users,
+    Construction,
+    Landmark,
+    TrendingUp,
+    Key,
+  } as const;
 
   return (
     <section id="services" className="relative py-24 overflow-hidden bg-transparent">
@@ -92,7 +100,7 @@ export default function Services() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
-            const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.Home;
+            const IconComponent = iconMap[service.icon as keyof typeof iconMap] || Home;
             return (
               <motion.div
                 key={service.title + index}

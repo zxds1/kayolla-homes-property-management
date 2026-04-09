@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Services from "./components/Services";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Listings from "./components/Listings";
-import Testimonials from "./components/Testimonials";
-import OfficeMap from "./components/OfficeMap";
-import AdminPanel from "./components/AdminPanel";
-import Chatbot from "./components/Chatbot";
-import StartupScreen from "./components/StartupScreen";
 import LoadingScreen from "./components/LoadingScreen";
 import { motion, AnimatePresence } from "motion/react";
 import { Settings } from "lucide-react";
 import { useAppData } from "./hooks/useAppData";
 
+const Services = lazy(() => import("./components/Services"));
+const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+const Listings = lazy(() => import("./components/Listings"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const OfficeMap = lazy(() => import("./components/OfficeMap"));
+const AdminPanel = lazy(() => import("./components/AdminPanel"));
+const Chatbot = lazy(() => import("./components/Chatbot"));
+
 export default function App() {
   const [showAdmin, setShowAdmin] = useState(false);
-  const [bootReady, setBootReady] = useState(false);
   const { data } = useAppData();
 
   useEffect(() => {
@@ -45,17 +44,16 @@ export default function App() {
     }
   }, [data]);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => setBootReady(true), 1400);
-    return () => window.clearTimeout(timer);
-  }, []);
+  if (!data) {
+    return <LoadingScreen label="Syncing site data" />;
+  }
 
   return (
     <AnimatePresence mode="wait">
-      {!bootReady ? (
-        <StartupScreen />
-      ) : showAdmin ? (
-        <AdminPanel onClose={() => setShowAdmin(false)} />
+      {showAdmin ? (
+        <Suspense fallback={<LoadingScreen label="Loading admin tools" />}>
+          <AdminPanel onClose={() => setShowAdmin(false)} />
+        </Suspense>
       ) : (
         <motion.div
           key="app"
@@ -99,8 +97,12 @@ export default function App() {
               </div>
             </div>
 
-            <Services />
-            <Listings />
+            <Suspense fallback={<div className="min-h-[28rem] bg-kayolla-white" />}>
+              <Services />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[40rem] bg-kayolla-white" />}>
+              <Listings />
+            </Suspense>
             
             {/* Call to Action Section */}
             <section className="relative py-20 bg-kayolla-red overflow-hidden">
@@ -151,13 +153,25 @@ export default function App() {
               </div>
             </section>
 
-            <About />
-            <Testimonials />
-            <OfficeMap />
-            <Contact />
+            <Suspense fallback={<div className="min-h-[24rem] bg-kayolla-white" />}>
+              <About />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[20rem] bg-kayolla-white" />}>
+              <Testimonials />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[22rem] bg-kayolla-white" />}>
+              <OfficeMap />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[24rem] bg-kayolla-white" />}>
+              <Contact />
+            </Suspense>
           </main>
-          <Footer />
-          <Chatbot />
+          <Suspense fallback={<div className="h-40 bg-kayolla-white" />}>
+            <Footer />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Chatbot />
+          </Suspense>
 
           {/* Admin Toggle Button (Hidden/Floating) */}
           <button 
